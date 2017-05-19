@@ -161,6 +161,9 @@ function degToRad(degrees) {
 var mouseDown = false;
 var lastMouseX = null;
 var lastMouseY = null;
+var lastTouchX = null;
+var lastTouchY = null;
+var touchDown = false;
 
 var moonRotationMatrix = mat4.create();
 mat4.identity(moonRotationMatrix);
@@ -170,10 +173,20 @@ function handleMouseDown(event) {
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
 }
+function handleTouchDown(event) {
+    var touch = event.changedTouches[0];
+    touchDown = true;
+    lastTouchX = touch.pageX
+    lastTouchY = touch.pageY;
+}
 
 
 function handleMouseUp(event) {
     mouseDown = false;
+}
+
+function handleTouchUp(event) {
+    touchDown = false;
 }
 
 
@@ -196,6 +209,28 @@ function handleMouseMove(event) {
 
     lastMouseX = newX
     lastMouseY = newY;
+}
+function handleTouchMove(event) {
+    var touch = event.changedTouches[0];
+    if (!touchDown && touch) {
+        return;
+    }
+
+    var newX = touch.pageX;
+    var newY = touch.pageY;
+
+    var deltaX = newX - lastTouchX
+    var newRotationMatrix = mat4.create();
+    mat4.identity(newRotationMatrix);
+    mat4.rotate(newRotationMatrix, degToRad(deltaX / 10), [0, 1, 0]);
+
+    var deltaY = newY - lastTouchY;
+    mat4.rotate(newRotationMatrix, degToRad(deltaY / 10), [1, 0, 0]);
+
+    mat4.multiply(newRotationMatrix, moonRotationMatrix, moonRotationMatrix);
+
+    lastTouchX = newX
+    lastTouchY = newY;
 }
 
 
@@ -357,11 +392,11 @@ function webGLStart() {
     gl.enable(gl.DEPTH_TEST);
 
     canvas.onmousedown = handleMouseDown;
-    canvas.ontouchstart = handleMouseDown;
+    canvas.addEventListener("touchstart", handleMouseDown, false);
     document.onmouseup = handleMouseUp;
-    document.ontouchend = handleMouseUp;
+    document.addEventListener("touchend", handleMouseUp, false);
     document.onmousemove = handleMouseMove;
-    document.ontouchmove = handleMouseMove;
+    document.addEventListener("touchmove", handleMouseMove, false);
 
     setInterval(function(){
       var newRotationMatrix = mat4.create();
