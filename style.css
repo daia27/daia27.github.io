@@ -1,0 +1,97 @@
+input, table{
+  display: none;
+}
+
+canvas{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+}
+
+@keyframes particleAnimation1
+{
+    from {
+        top: -100px;
+        left: -60%;
+    }
+    to {
+        top:  calc( 100% + 100px );
+        left: calc( 100% + 100px );
+    }
+}
+
+@keyframes particleAnimation2
+{
+    from {
+        top: -100px;
+        left: -100px;
+    }
+    to {
+        top:  calc( 100% + 100px );
+        left: calc( 100% + 100px );
+    }
+}
+
+@keyframes particleAnimation3
+{
+    from {
+        top: -100px;
+        left: -100px;
+    }
+    to {
+        top:  calc( 100% + 100px );
+        left: calc( 100% + 100px );
+    }
+}
+
+
+body {
+   background: url(background.jpg) no-repeat center center fixed;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
+.p{
+  position:fixed;
+  left:0px;
+  top:50px;
+  width:1px;
+  height:1px;
+  background-color:white;
+  position:fixed;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transform: rotate(45deg);
+}
+.p::before{
+  position:absolute;
+  display:block;
+  content:"";
+  width:100px;
+  right:1px;
+  top:0px;
+  height:1px;
+  background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(255,255,255,0.4) 100%);
+}
+.p-1{
+  animation-duration:10s;
+  animation-name:particleAnimation1;
+}
+.p-2{
+  animation-duration:5s;
+  top:60%;
+  width:3px;
+  height:3px;
+  animation-name:particleAnimation2;
+}
+.p-3{
+  animation-duration:20s;
+  top:90%;
+  animation-name:particleAnimation3;
+}
