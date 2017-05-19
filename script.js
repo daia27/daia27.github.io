@@ -357,8 +357,11 @@ function webGLStart() {
     gl.enable(gl.DEPTH_TEST);
 
     canvas.onmousedown = handleMouseDown;
+    canvas.ontouchstart = handleMouseDown;
     document.onmouseup = handleMouseUp;
+    document.ontouchend = handleMouseUp;
     document.onmousemove = handleMouseMove;
+    document.ontouchmove = handleMouseMove;
 
     setInterval(function(){
       var newRotationMatrix = mat4.create();
