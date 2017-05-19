@@ -173,22 +173,10 @@ function handleMouseDown(event) {
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
 }
-function handleTouchDown(event) {
-    var touch = event.changedTouches[0];
-    touchDown = true;
-    lastTouchX = touch.pageX
-    lastTouchY = touch.pageY;
-}
-
 
 function handleMouseUp(event) {
     mouseDown = false;
 }
-
-function handleTouchUp(event) {
-    touchDown = false;
-}
-
 
 function handleMouseMove(event) {
     if (!mouseDown) {
@@ -210,6 +198,18 @@ function handleMouseMove(event) {
     lastMouseX = newX
     lastMouseY = newY;
 }
+
+function handleTouchDown(event) {
+    var touch = event.changedTouches[0];
+    touchDown = true;
+    lastTouchX = touch.pageX
+    lastTouchY = touch.pageY;
+}
+
+function handleTouchUp(event) {
+    touchDown = false;
+}
+
 function handleTouchMove(event) {
     var touch = event.changedTouches[0];
     if (!touchDown && touch) {
@@ -392,11 +392,11 @@ function webGLStart() {
     gl.enable(gl.DEPTH_TEST);
 
     canvas.onmousedown = handleMouseDown;
-    canvas.addEventListener("touchstart", handleMouseDown, false);
+    canvas.addEventListener("touchstart", handleTouchDown, false);
     document.onmouseup = handleMouseUp;
-    document.addEventListener("touchend", handleMouseUp, false);
+    document.addEventListener("touchend", handleTouchUp, false);
     document.onmousemove = handleMouseMove;
-    document.addEventListener("touchmove", handleMouseMove, false);
+    document.addEventListener("touchmove", handleTouchMove, false);
 
     setInterval(function(){
       var newRotationMatrix = mat4.create();
