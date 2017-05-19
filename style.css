@@ -16,8 +16,8 @@ canvas{
 @keyframes particleAnimation1
 {
     from {
-        top: -100px;
-        left: -60%;
+        top: 0px;
+        left: 60%;
     }
     to {
         top:  calc( 100% + 100px );
@@ -40,12 +40,12 @@ canvas{
 @keyframes particleAnimation3
 {
     from {
-        top: -100px;
-        left: -100px;
+        top: 0px;
+        left: 10%;
     }
     to {
         top:  calc( 100% + 100px );
-        left: calc( 100% + 100px );
+        left: calc( 30% + 100px );
     }
 }
 
@@ -85,13 +85,13 @@ body {
 }
 .p-2{
   animation-duration:5s;
-  top:60%;
   width:3px;
   height:3px;
   animation-name:particleAnimation2;
+  transform: rotate(30deg);
 }
 .p-3{
-  animation-duration:20s;
-  top:90%;
+  animation-duration:8s;
   animation-name:particleAnimation3;
+  transform: rotate(60deg);
 }
