@@ -1,3 +1,7 @@
+html, body{
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
 input, table{
   display: none;
 }
